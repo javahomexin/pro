@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!-- Struts.xml的配置文件 -->
+    <!-- 是否启用开发模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 将对象工厂指定为spring -->
+    <constant name="struts.objectFactory" value="spring"/>
+    <!-- struts的Action访问后缀 -->
+    <constant name="struts.action.extension" value="do"/>
+
+    <!--<constant name="struts.enable.DynamicMethodInvocation" value="false" />-->
+
+    <!-- 指定表单主题 -->
+    <constant name="struts.ui.theme" value="simple"/>
+    <!--2.3 以后 strict-method-invocation="false" -->
+    <package name="default" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <!-- 如果不指定method，那么默认方法是execute-->
+        <!--name:Action类的名字，具有唯一性，页面上通过name来访问Action类 -->
+        <action name="bookAction" class="bookAction"></action>
+
+        <action name="role_*" class="roleAction" method="{1}" >
+
+            <result name="list">/WEB-INF/jsp/role/list.jsp</result>
+            <result name="toList" type="redirectAction">
+                <param name="actionName">role_list</param>
+                <param name="namespace">/</param>
+            </result>
+            <result name="editUI">/WEB-INF/jsp/role/edit.jsp</result>
+            <result name="addUI">/WEB-INF/jsp/role/add.jsp</result>
+        </action>
+
+        <action name="department_*" class="departmentAction" method="{1}" >
+
+            <result name="list">/WEB-INF/jsp/depa/list.jsp</result>
+            <result name="toList" type="redirectAction">
+                <param name="actionName">department_list</param>
+                <param name="namespace">/</param>
+            </result>
+            <result name="editUI">/WEB-INF/jsp/depa/saveUI.jsp</result>
+            <result name="addUI">/WEB-INF/jsp/depa/saveUI.jsp</result>
+        </action>
+
+        <!--<action name="role_list" class="roleAction" method="list">-->
+
+            <!--<result name="list">/WEB-INF/jsp/role/list.jsp</result>-->
+        <!--</action>-->
+
+        <!--<action name="role_update" class="roleAction" method="update">-->
+
+            <!--<result name="edit">/WEB-INF/jsp/role/edit.jsp</result>-->
+        <!--</action>-->
+
+    </package>
+</struts>
